@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Services extends Model
+{
+    use HasFactory;
+
+    protected $table = 'services';
+
+    protected $fillable = [
+        'description',
+        'value',
+        'image',
+        'barber_shop',
+        'duration'
+    ];
+
+    function barberShop()
+    {
+        return $this->belongsTo(BarberShop::class, 'id', 'barber_shop');
+    }
+}
