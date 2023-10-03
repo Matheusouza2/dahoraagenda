@@ -40,6 +40,7 @@ class BarberShopController extends Controller
                 'id' => $barberShop->id,
                 'name' => $barberShop->name,
                 'open' => $open,
+                'logo' => $barberShop->logo
             ];
         }
 

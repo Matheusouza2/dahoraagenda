@@ -3,6 +3,7 @@
 use App\Http\Controllers\BarberShopController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'index'])->name('hero_block');
 
-Route::get('{barberShopPhone}', [BarberShopController::class, 'consultByPhone']);
+Route::get('barbearia/{barberShopPhone}', [BarberShopController::class, 'consultByPhone']);
 
 Route::post('login', [UserController::class, 'login'])->name('login');
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
@@ -43,6 +44,10 @@ Route::prefix('barbearias')->middleware(['auth'])->group(function () {
     Route::get('lista', [BarberShopController::class, 'index'])->name('barber_shop_list');
 
     Route::get('cadastrar', [BarberShopController::class, 'create']);
+});
+
+Route::prefix('barbeiro')->middleware(['auth'])->group(function () {
+    Route::get('inicio', [ProfissionalController::class, 'index'])->name('home_barber');
 });
 
 Route::middleware(['auth'])->get('perfil/configuracoes', function () {

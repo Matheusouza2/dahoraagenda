@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarberShop;
-use App\Models\Schedule;
+use App\Models\BarberShopProfissional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ClientController extends Controller
+class ProfissionalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.home_client');
+        $barberShops = BarberShop::where('owner', Auth::user()->id)->get();
+        $barberShopProfessional = BarberShopProfissional::where('barber_shop', $barberShops[0]->id)->get();
+        session(['owner' => true]);
+        return view('pages.home_barber', compact('barberShops', 'barberShopProfessional'));
     }
 
     /**

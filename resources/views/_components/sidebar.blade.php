@@ -24,18 +24,23 @@
             <!-- Sidenav Nav -->
             <ul class="sidenav-nav ps-0">
                 <li>
-                    <a href="{{ route('home_client') }}"><i class="bi bi-house-door"></i> Início</a>
+                    <a href="{{ session('owner') == true ? route('home_barber') : route('home_client') }}"><i
+                            class="bi bi-house-door"></i> Início</a>
                 </li>
+
                 <li>
                     <a href="{{ route('services_client') }}"><i class="bi bi-collection"></i> Lista de Atendimentos</a>
                 </li>
+
                 <li>
                     <a href="{{ route('barber_shop_list') }}"><i class="fa-light fa-scissors"></i> Lista de
                         barbearias</a>
                 </li>
+
                 <li>
                     <a href="{{ route('settings') }}"><i class="bi bi-gear"></i> Configurações</a>
                 </li>
+
                 <li>
                     <div class="night-mode-nav">
                         <i class="bi bi-moon"></i> Modo escuro
@@ -44,9 +49,11 @@
                         </div>
                     </div>
                 </li>
+
                 <li>
                     <a href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Sair</a>
                 </li>
+
             </ul>
 
             <!-- Copyright Info -->

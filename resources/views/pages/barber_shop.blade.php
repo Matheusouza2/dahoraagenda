@@ -17,7 +17,7 @@
                         <!-- Single Blog Card -->
                         <div class="col-6 col-sm-4 col-md-3">
                             <div class="card position-relative shadow-sm">
-                                <img class="card-img-top" src="{{ asset('images/barber/barber_shop.svg') }}" alt="">
+                                <img class="card-img-top" src="{{ asset($barbearia['logo']) }}" alt="">
                                 <div class="card-body">
                                     <span
                                         class="badge {{ $barbearia['open'] ? 'bg-success' : 'bg-danger' }} rounded-pill mb-2 d-inline-block">

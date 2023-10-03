@@ -174,6 +174,7 @@
                 $(".search-input .btn-clos").fadeOut(500);
             }
         });
+
         $(".search-input .btn-clos").on("click", function() {
             $(".search-input .form-control").val(null);
             $(this).fadeOut(0);

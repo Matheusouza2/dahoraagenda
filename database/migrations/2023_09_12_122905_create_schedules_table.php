@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('barber')->unsigned();
             $table->date('date');
             $table->time('hour');
-            $table->bigInteger('status');
+            $table->bigInteger('status')->unsigned();
             $table->timestamps();
 
             $table->foreign('barber_shop')->references('id')->on('barber_shops')->onDelete('cascade')->onUpdate('cascade');

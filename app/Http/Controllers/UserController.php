@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarberShop;
+use App\Models\BarberShopProfissional;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,17 +17,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
-            $owner = BarberShop::where('owner', Auth::user()->id)->count();
-
-            if ($owner > 0) {
-                return redirect()->route('named_route');
-            } else {
-                return redirect()->route('home_client');
-            }
+            return redirect()->route('home_client');
         }
+
         return view('hero_block');
     }
 
@@ -109,11 +105,13 @@ class UserController extends Controller
         }
 
         if (Auth::attempt(['user' => $request->user, 'password' => $request->password], true)) {
-            $token = Auth::user()->createToken();
-            dd($token->plainTextToken);
+            $token = Auth::user()->createToken('user_token');
+
             $cookie = new Cookie('_user_token', $token->plainTextToken);
             if ($client) {
                 return redirect()->route('home_client')->withCookie($cookie);
+            } else {
+                return redirect()->route('home_barber')->withCookie($cookie);;
             }
         } else {
             return redirect()->back()->withErrors(['login' => 'Usuário não encontrado, tente realizar seu cadastro ou entre em contato com o suporte !'])->withInput();
@@ -123,8 +121,8 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::user()->tokens()->delete();
-        Auth::logout();
         Session::flush();
+        Auth::logout();
 
         return redirect()->route('hero_block');
     }

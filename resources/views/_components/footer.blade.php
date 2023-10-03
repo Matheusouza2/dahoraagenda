@@ -5,7 +5,7 @@
             <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
                 <li>
                     <a class="{{ Request::is('cliente/inicio') ? 'text-primary' : '' }}"
-                        href="{{ route('home_client') }}">
+                        href="{{ session('owner') == true ? route('home_barber') : route('home_client') }}">
                         <i class="bi bi-house"></i>
                     </a>
                 </li>
